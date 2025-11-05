@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PinkDesire — Private Live (18+)</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* (same variables as before) */
+      --bg-1: #fff6f8;
+      --bg-2: #fff1f4;
+      --blush-1: #ffdfe6;
+      --blush-2: #ff9fb3;
+      --rose-muted: #ff7b97;
+      --accent-ink: #2b1620;
+      --muted: #3b2f31;
+      --muted-2: rgba(59,47,49,0.82);
+      --glass: rgba(255,255,255,0.03);
+      --card-radius: 16px;
+      --maxw: 1180px;
+      --shadow: 0 20px 60px rgba(43,22,32,0.08);
+
+      --btn-primary-bg: #ff5b7d;
+      --btn-primary-bg-hover: #e84c6c;
+      --btn-primary-text: #ffffff;
+
+      --btn-secondary-bg: #fffafb;
+      --btn-secondary-text: #2b1620;
+      --btn-secondary-border: rgba(43,22,32,0.06);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:
+        radial-gradient(800px 400px at 12% 8%, rgba(255,159,179,0.18), transparent 10%),
+        radial-gradient(700px 350px at 90% 88%, rgba(255,214,224,0.12), transparent 10%),
+        linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      color:var(--muted);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--maxw);
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:28px;
+      align-items:start;
+    }
+
+    .hero{
+      position:relative;
+      border-radius:22px;
+      overflow:hidden;
+      padding:0;
+      min-height:520px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,0.03);
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,250,250,0.9));
+    }
+
+    .hero::before{
+      content:'';
+      position:absolute; inset:0;
+      background:
+        radial-gradient(520px 240px at 10% 12%, rgba(255,159,179,0.12), transparent 6%),
+        radial-gradient(420px 200px at 92% 88%, rgba(255,214,224,0.08), transparent 6%);
+      pointer-events:none;
+      mix-blend-mode:overlay;
+      z-index:2;
+    }
+
+    .smoke{
+      position:absolute; inset:0; z-index:3; pointer-events:none; mix-blend-mode: screen;
+      background-image:
+        radial-gradient(800px 300px at 20% 5%, rgba(255,159,179,0.10), transparent 8%),
+        radial-gradient(600px 260px at 85% 96%, rgba(255,214,224,0.06), transparent 8%);
+      filter: blur(24px);
+      opacity:0.95;
+      animation: slowDrift 20s linear infinite;
+    }
+    @keyframes slowDrift{ 0%{transform:translateY(0)} 50%{transform:translateY(-14px)} 100%{transform:translateY(0)} }
+
+    /* ---------- CHANGED: preview set to 4:5 aspect ratio ---------- */
+    .preview{
+      position:relative;
+      z-index:4;
+      width:100%;
+      /* Use aspect-ratio to lock to 4:5 (width:height = 4/5) */
+      aspect-ratio: 4 / 5;
+      /* fallback for older browsers: padding-top = (height/width)*100 = (5/4)*100 = 125% */
+      min-height: 320px;
+      overflow:hidden;
+      display:block;
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,250,250,0.85));
+      /* For older browsers we create an intrinsic box using ::before */
+    }
+    /* Fallback block for old browsers that don't support aspect-ratio */
+    .preview::before{
+      content:'';
+      display:block;
+      padding-top:125%; /* 5/4 = 125% */
+    }
+
+    .preview img{
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; /* ensures 4:5 PNG fills the area nicely */
+      display:block;
+      transition: transform .6s cubic-bezier(.2,.9,.2,1), filter .35s ease;
+      transform-origin:center;
+      will-change:transform;
+      filter: contrast(1.03) saturate(1.02);
+    }
+    .preview img:hover{ transform:scale(1.02); filter: contrast(1.05) saturate(1.05) }
+
+    .hero-overlay{
+      position:absolute; left:28px; bottom:28px; z-index:5;
+      color:var(--muted);
+      text-shadow: 0 6px 18px rgba(255,255,255,0.7);
+      max-width:62%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,250,250,0.88));
+      padding:12px 16px;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,0.03);
+      backdrop-filter: blur(4px);
+    }
+    .hero-overlay .site{
+      font-family:'Playfair Display', serif;
+      font-size: clamp(1.7rem, 4.4vw, 2.4rem);
+      font-weight:700;
+      letter-spacing:-0.4px;
+      color: var(--muted);
+      background: linear-gradient(90deg,var(--blush-2),var(--rose-muted));
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .hero-overlay p{ margin-top:6px; color:var(--muted-2); font-weight:600; font-size:0.98rem; }
+
+    /* (rest of your CSS stays the same) */
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,250,250,0.98));
+      padding:20px;
+      border-radius:18px;
+      border:1px solid rgba(0,0,0,0.04);
+      box-shadow: 0 12px 40px rgba(43,22,32,0.06);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      min-height:420px;
+      position:relative;
+    }
+
+    .logo { width:54px;height:54px;border-radius:12px; background: linear-gradient(135deg,var(--blush-2),var(--rose-muted)); display:grid;place-items:center;font-weight:900;color:var(--accent-ink);font-size:1.05rem; box-shadow: 0 8px 20px rgba(255,159,179,0.06); }
+
+    .meta{ display:flex; gap:12px; align-items:center; }
+    .meta h3{ margin:0; font-size:1.15rem; color:var(--muted); font-weight:800; }
+    .meta p{ margin:0; color:var(--muted-2); font-weight:600; }
+
+    .badges{ display:flex; gap:8px; margin-top:6px; flex-wrap:wrap; }
+    .badge{ padding:8px 12px; border-radius:999px; background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,250,250,0.98)); color:var(--muted); font-weight:800; border:1px solid rgba(0,0,0,0.03); }
+
+    .price{ margin-top:6px; font-weight:900; font-size:1.2rem; color: var(--blush-2); }
+
+    .ctas{ display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; }
+    .btn{ display:inline-flex; align-items:center; gap:10px; justify-content:center; padding:12px 18px; border-radius:12px; font-weight:800; cursor:pointer; text-decoration:none; border:none; min-height:52px; min-width:140px; position:relative; overflow:visible; transform:translateZ(0); transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease; }
+
+    .btn.primary{ background: linear-gradient(90deg, var(--btn-primary-bg), var(--btn-primary-bg-hover)); color: var(--btn-primary-text); box-shadow: 0 12px 36px rgba(255,91,125,0.12), inset 0 -6px 12px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.03); }
+    .btn.primary:hover{ transform: translateY(-4px); box-shadow: 0 22px 54px rgba(232,76,108,0.14); }
+    .btn.primary:active{ transform: translateY(0); }
+
+    .btn.secondary{ background: var(--btn-secondary-bg); color: var(--btn-secondary-text); border: 1px solid var(--btn-secondary-border); box-shadow: 0 8px 24px rgba(43,22,32,0.03); }
+    .btn.secondary:hover{ transform: translateY(-3px); box-shadow: 0 14px 36px rgba(43,22,32,0.06); border-color: rgba(43,22,32,0.09); }
+    .btn.secondary:active{ transform: translateY(0); }
+
+    .micro{ color: var(--muted-2); font-size:0.9rem; font-weight:700; text-align:center; margin-top:6px; }
+
+    .features{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+    .feature{ display:flex; gap:12px; align-items:center; padding:10px; border-radius:12px; background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,250,250,0.98)); border:1px solid rgba(0,0,0,0.03); color:var(--muted); font-weight:700; }
+    .feature .ico{ width:44px;height:44px;border-radius:10px; display:grid; place-items:center; background: rgba(255,255,255,0.97); color:var(--rose-muted); font-size:1.05rem; }
+
+    .legal{ margin-top:auto; font-size:0.82rem; color: rgba(59,47,49,0.6); text-align:center; }
+
+    .age-backdrop{ position:fixed; inset:0; background: linear-gradient(180deg, rgba(255,245,247,0.9), rgba(255,246,247,0.92)); display:grid; place-items:center; z-index:9999; }
+    .age-modal{ width:94%; max-width:440px; border-radius:12px; padding:18px; text-align:center; border:1px solid rgba(0,0,0,0.03); background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,250,250,0.99)); box-shadow: 0 30px 90px rgba(43,22,32,0.06); }
+    .age-modal h4{ margin:0; font-size:1.18rem; color:var(--muted); font-weight:800; }
+    .age-modal p{ margin:8px 0 0 0; color:var(--muted-2); font-weight:700; }
+    .age-actions{ display:flex; gap:12px; margin-top:14px; justify-content:center; }
+    .age-actions .btn{ min-width:120px; }
+
+    @media (max-width:980px){
+      .container{ grid-template-columns: 1fr; }
+      .hero{ min-height:420px }
+    }
+    @media (max-width:520px){
+      .hero-overlay{ left:16px; bottom:16px; max-width:85% }
+      .preview img{ /* keep reasonable height on very small screens */ }
+      .ctas{ flex-direction:column; gap:10px; }
+      .btn{ width:100%; min-width:auto }
+    }
+
+    :focus{ outline: 3px solid rgba(255,91,125,0.18); outline-offset: 3px; }
+    code{ background:rgba(255,255,255,0.03); padding:6px 8px; border-radius:8px; color:var(--muted-2) }
+  </style>
+</head>
+<body>
+
+  <!-- AGE GATE -->
+  <div id="ageGate" class="age-backdrop" role="dialog" aria-modal="true" aria-label="Confirm age">
+    <div class="age-modal" role="document">
+      <h4>Confirm your age</h4>
+      <p>Ye content 18+ ke liye hai. Aage badhne se pehle kripya confirm karein.</p>
+      <div class="age-actions">
+        <button id="under18" class="btn secondary" aria-label="Under 18">I'm under 18</button>
+        <button id="over18" class="btn primary" aria-label="I am 18 or older">I am 18+</button>
+      </div>
+      <p style="margin-top:10px; color:rgba(59,47,49,0.72); font-weight:700">By continuing you accept Terms & verify you are 18+.</p>
+    </div>
+  </div>
+
+  <div class="container" aria-hidden="false">
+
+    <!-- HERO (big visual) -->
+    <section class="hero" aria-label="App preview hero">
+      <div class="preview" aria-hidden="false">
+        <!-- Use a 4:5 PNG here; object-fit:cover will center & crop as needed -->
+        <img src="my-screenshot.png" alt="Preview — my-screenshot.png">
+      </div>
+
+      <div class="smoke" aria-hidden="true"></div>
+
+      <div class="hero-overlay" role="note" aria-hidden="false">
+        <div class="site">PinkDesire</div>
+        <p>Private live calls • Verified users • Low-cost</p>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL -->
+    <aside class="card" aria-label="Download & info">
+      <div class="meta" style="gap:12px;">
+        <div class="logo">PD</div>
+        <div>
+          <h3>Private live calls</h3>
+          <p class="lead">Secure • Encrypted • Instant</p>
+        </div>
+      </div>
+
+      <div class="badges">
+        <span class="badge">Popular</span>
+        <span class="badge">Encrypted</span>
+        <span class="badge">Verified</span>
+      </div>
+
+      <div class="price">₹10 / 10 min</div>
+
+      <div class="ctas" role="group" aria-label="Primary Actions">
+        <a id="getApp" class="btn primary" href="PinkDesire_v3.apk" download aria-label="Download PinkDesire APK">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 3v10" stroke="#2b1620" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 11l4 4 4-4" stroke="#2b1620" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M21 21H3" stroke="#2b1620" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Get App
+        </a>
+
+        <button id="kissNow" class="btn secondary" aria-label="Kiss now">KISS</button>
+      </div>
+
+      <div class="micro">Tap <strong>Get App</strong> to download. APK file: <code>PinkDesire_v3.apk</code></div>
+
+      <div class="features" aria-hidden="false">
+        <div class="feature"><div class="ico">🔞</div> 18+ verified</div>
+        <div class="feature"><div class="ico">📹</div> HD private video</div>
+        <div class="feature"><div class="ico">💬</div> Private chat</div>
+        <div class="feature"><div class="ico">💳</div> Secure payments</div>
+      </div>
+
+      <div class="legal">By downloading you accept our <a href="#" style="color:var(--blush-2);">Terms</a> & confirm you're 18+.</div>
+    </aside>
+
+  </div>
+
+  <script>
+    // Age gate logic
+    const ageGate = document.getElementById('ageGate');
+    const over18 = document.getElementById('over18');
+    const under18 = document.getElementById('under18');
+
+    over18.addEventListener('click', () => {
+      ageGate.style.display = 'none';
+      try { localStorage.setItem('pd_age_ok','1'); } catch(e){}
+    });
+
+    under18.addEventListener('click', () => {
+      under18.textContent = 'Redirecting...';
+      setTimeout(()=> window.location.href = 'about:blank', 900);
+    });
+
+    try {
+      if(localStorage.getItem('pd_age_ok') === '1') ageGate.style.display = 'none';
+    } catch(e){}
+
+    // Kiss interaction
+    const kiss = document.getElementById('kissNow');
+    kiss.addEventListener('click', () => {
+      kiss.animate([
+        { transform: 'translateY(0) scale(1)' },
+        { transform: 'translateY(-6px) scale(1.06)' },
+        { transform: 'translateY(0) scale(1)' }
+      ], { duration: 380, easing: 'cubic-bezier(.2,.9,.2,1)' });
+
+      const primary = document.querySelector('.btn.primary');
+      primary.animate([{ boxShadow: '0 12px 36px rgba(255,91,125,0.12)' }, { boxShadow: '0 26px 60px rgba(255,91,125,0.18)' }, { boxShadow: '0 12px 36px rgba(255,91,125,0.12)' }], { duration: 520, easing: 'ease-out' });
+    });
+
+    // keyboard accessibility for age gate
+    document.addEventListener('keydown', (e) => {
+      if(ageGate && ageGate.style.display !== 'none'){
+        if(e.key === 'Enter') over18.click();
+      }
+    });
+
+    // ensure download link uses provided filename
+    document.getElementById('getApp').href = 'PinkDesire_v3.apk';
+  </script>
+</body>
+</html>
